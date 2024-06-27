@@ -1,5 +1,5 @@
 import "./App.css";
-import WebApp from "@twa-dev/sdk";
+// import WebApp from "@twa-dev/sdk";
 import { NightlyConnectAdapter } from "@nightlylabs/wallet-selector-solana";
 // import { Market } from "@invariant-labs/sdk";
 import { StandardAdapter, WalletAdapter } from "./walletAdapter";
