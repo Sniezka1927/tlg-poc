@@ -20,6 +20,7 @@ export const nightlyConnectAdapter: NightlyConnectAdapter =
       },
       url: "https://nc2.nightly.app",
     },
+    // @ts-ignore
     true
   );
 
