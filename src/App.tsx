@@ -27,9 +27,21 @@ export const nightlyConnectAdapter: NightlyConnectAdapter =
 function App() {
   const [address, setAddress] = useState("");
 
-  const loadWallet = async () => {
+  const connectWallet = async () => {
     try {
+      WebApp.showAlert(`Connecting wallet...`);
       await wallet.connect();
+      setAddress(wallet.publicKey.toString());
+    } catch (e) {
+      console.log(e);
+      WebApp.showAlert(`Err: ${e}`);
+    }
+  };
+
+  const disconnectWallet = async () => {
+    try {
+      WebApp.showAlert(`Disconnecting wallet...`);
+      await wallet.disconnect();
       setAddress(wallet.publicKey.toString());
     } catch (e) {
       console.log(e);
@@ -41,7 +53,8 @@ function App() {
     <>
       <h1>PoC</h1>
       <div className="card">
-        <button onClick={loadWallet}>connect wallet</button>
+        <button onClick={connectWallet}>connect wallet</button>
+        <button onClick={disconnectWallet}>disconnect wallet</button>
       </div>
       <div className="card">
         <span>{address}</span>
