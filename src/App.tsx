@@ -1,61 +1,55 @@
 import "./App.css";
 // import WebApp from "@twa-dev/sdk";
-import { NightlyConnectAdapter } from "@nightlylabs/wallet-selector-solana";
-// import { Market } from "@invariant-labs/sdk";
-import { StandardAdapter, WalletAdapter } from "./walletAdapter";
-// import { Connection } from "@solana/web3.js";
+import { getDefaultAlephiumWallet } from "@alephium/get-extension-wallet";
+import {
+  AlephiumWalletProvider,
+  AlephiumConnectButton,
+} from "@alephium/web3-react";
+
 import { useState } from "react";
-
-// let _market: Market;
-// const connection = new Connection("https://api.devnet.solana.com", "recent");
-const wallet: WalletAdapter = new StandardAdapter();
-
-export const nightlyConnectAdapter: NightlyConnectAdapter =
-  NightlyConnectAdapter.buildLazy(
-    {
-      appMetadata: {
-        name: "Invariant",
-        description: "Invariant - AMM DEX provided concentrated liquidity",
-        icon: "https://invariant.app/favicon-192x192.png",
-      },
-      url: "https://nc2.nightly.app",
-    },
-    // @ts-ignore
-    true
-  );
 
 function App() {
   const [address, setAddress] = useState("");
 
   const connectWallet = async () => {
-    try {
-      // WebApp.showAlert(`Connecting wallet...`);
-      await wallet.connect();
-      setAddress(wallet.publicKey.toString());
-    } catch (e) {
-      console.log(e);
-      // WebApp.showAlert(`Err: ${e}`);
+    // Returns the `window.alephiumProviders.alephium` object after user selects
+    // the extension wallet.
+    const windowAlephium = await getDefaultAlephiumWallet();
+    // Authenticate user to the current dApp, return the selected account
+    const selectedAccount = await windowAlephium?.enable();
+
+    if (windowAlephium && selectedAccount) {
+      console.log(windowAlephium);
+      console.log(selectedAccount);
+      setAddress(selectedAccount.address);
+      // From here, you can execute various transactions:
+      //
+      // windowAlephium.signAndSubmitTransferTx(...)
+      // windowAlephium.signAndSubmitDeployContractTx(...)
+      // windowAlephium.signAndSubmitExecuteScriptTx(...)
+      // ...
     }
   };
 
   const disconnectWallet = async () => {
-    try {
-      // WebApp.showAlert(`Disconnecting wallet...`);
-      await wallet.disconnect();
-      setAddress(wallet.publicKey.toString());
-    } catch (e) {
-      console.log(e);
-      // WebApp.showAlert(`Err: ${e}`);
-    }
+    // try {
+    //   await wallet.disconnect();
+    //   setAddress(wallet.publicKey.toString());
+    // } catch (e) {
+    //   console.log(e);
+    // }
   };
 
   return (
     <>
-      <h1>PoC</h1>
+      <h1>PoC - ALPH</h1>
       <div className="card">
         <button onClick={connectWallet}>connect wallet</button>
         <button onClick={disconnectWallet}>disconnect wallet</button>
       </div>
+      <AlephiumWalletProvider network="mainnet">
+        <AlephiumConnectButton />
+      </AlephiumWalletProvider>
       <div className="card">
         <span>{address}</span>
       </div>
