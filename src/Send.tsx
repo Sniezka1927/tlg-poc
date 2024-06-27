@@ -26,7 +26,7 @@ export const Send = () => {
 
   return (
     <div>
-      <button onClick={send}> Send 0.1 ALPH</button> <br />
+      <button onClick={send}> ign Tx</button> <br />
       {JSON.stringify(balance)} <br />
       {txId && <div>Transaction ID: {txId}</div>}
     </div>
