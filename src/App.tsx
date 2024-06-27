@@ -29,23 +29,23 @@ function App() {
 
   const connectWallet = async () => {
     try {
-      WebApp.showAlert(`Connecting wallet...`);
+      // WebApp.showAlert(`Connecting wallet...`);
       await wallet.connect();
       setAddress(wallet.publicKey.toString());
     } catch (e) {
       console.log(e);
-      WebApp.showAlert(`Err: ${e}`);
+      // WebApp.showAlert(`Err: ${e}`);
     }
   };
 
   const disconnectWallet = async () => {
     try {
-      WebApp.showAlert(`Disconnecting wallet...`);
+      // WebApp.showAlert(`Disconnecting wallet...`);
       await wallet.disconnect();
       setAddress(wallet.publicKey.toString());
     } catch (e) {
       console.log(e);
-      WebApp.showAlert(`Err: ${e}`);
+      // WebApp.showAlert(`Err: ${e}`);
     }
   };
 
