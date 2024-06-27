@@ -12,6 +12,8 @@
   "dependencies": {
     "@alephium/get-extension-wallet": "^1.1.0",
     "@alephium/web3-react": "^1.1.0",
+    "@alephium/web3": "^1.1.0",
+    "@alephium/cli": "^1.1.0",
     "@twa-dev/sdk": "^6.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
