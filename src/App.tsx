@@ -3,7 +3,7 @@ import {
   AlephiumWalletProvider,
   AlephiumConnectButton,
 } from "@alephium/web3-react";
-import { Send } from "./Send";
+// import { Send } from "./Send";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <h1>PoC - ALPH</h1>
       <AlephiumWalletProvider network="testnet">
         <AlephiumConnectButton />
-        <Send />
+        {/* <Send /> */}
       </AlephiumWalletProvider>
     </>
   );
